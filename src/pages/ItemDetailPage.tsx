@@ -27,7 +27,7 @@ const ItemDetailPage: React.FC<DetailPageProps> = ({
   selectedItem,
 }) => {
   const { id } = useParams<{ id?: string }>();
-  const { data } = useFetchProducts();
+  const { data } = useFetchProducts({ limit: 10, sort: "desc" });
 
   const productId = parseInt(id || "");
 

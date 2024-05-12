@@ -16,7 +16,9 @@ interface Product {
 }
 
 const App = () => {
-  const { data } = useFetchProducts();
+  const [filter, setFilter] = useState({ limit: 10, sort: "desc" });
+  const { data } = useFetchProducts({ limit: filter.limit,
+    sort: filter.sort });
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState<Product[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
@@ -109,6 +111,8 @@ const App = () => {
               handleAddToCart={handleAddToCart}
               handleDelete={handleDelete}
               selectedItem={selectedItem}
+              filter={filter}
+              setFilter={setFilter}
             />
           }
         />
