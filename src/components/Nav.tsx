@@ -18,7 +18,7 @@ const Nav: React.FC<NavProps> = ({
     <nav className="sticky top-0 left-0 z-10 flex items-center justify-around w-screen h-16 bg-green-800 shadow">
       <Link to={'/'}>
       <h2 className="font-serif text-xl font-semibold text-white">
-        Real Store
+        Unreal Store
       </h2>
       </Link>
       <ul className="flex justify-center gap-10 text-lg text-white">

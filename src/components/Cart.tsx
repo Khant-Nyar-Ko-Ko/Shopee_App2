@@ -1,4 +1,7 @@
+import { Link } from "react-router-dom";
+
 interface ProductCardProps {
+  id: number;
   title: string;
   price: number;
   description: string;
@@ -17,6 +20,7 @@ const truncateDescription = (description: string, maxLength: number) => {
 };
 
 const Cart: React.FC<ProductCardProps> = ({
+  id,
   title,
   price,
   description,
@@ -38,12 +42,21 @@ const Cart: React.FC<ProductCardProps> = ({
           <p className="">${price}</p>
           <p className="text-sm text-slate-400">{category}</p>
         </div>
-        <button
-          className="px-4 py-2 text-white duration-500 bg-green-800 border border-white rounded hover:text-green-900 hover:border-green-800 hover:bg-white"
-          onClick={handleAddToCart}
-        >
-          Buy
-        </button>
+        <div className=" flex justify-center gap-5 mx-auto">
+          <button
+            className=" w-[100px] px-4 py-2 text-white duration-500 bg-green-800 border border-white rounded hover:text-green-900 hover:border-green-800 hover:bg-white"
+            onClick={handleAddToCart}
+          >
+            Buy
+          </button>
+          <Link to={`/products/${id}`}>
+          <button
+            className="w-[100px] px-4 py-2 text-green-800 duration-500 border-green-800 border  rounded hover:text-white hover:border-white hover:bg-green-800"
+          >
+            Detail
+          </button>
+          </Link>
+        </div>
       </div>
     </div>
   );

@@ -3,6 +3,7 @@ import Nav from "./components/Nav";
 import HomePage from "./pages/HomePage";
 import { useEffect, useState } from "react";
 import { useFetchProducts } from "./hooks/useProductsApi";
+import ItemDetailPage from "./pages/ItemDetailPage";
 
 interface Product {
   id: number;
@@ -15,26 +16,24 @@ interface Product {
 }
 
 const App = () => {
-
   const { data } = useFetchProducts();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState<Product[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredData, setFilteredData] = useState<Product[]>([]);
-  
-  const handleSearchQuery = (e : React.ChangeEvent<HTMLInputElement>) => {
+
+  const handleSearchQuery = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
-  }
+  };
 
   useEffect(() => {
-    if(data) {
-      const filtered = data.filter((item) => 
-      item.title.toLowerCase().includes(searchQuery.toLowerCase()));
+    if (data) {
+      const filtered = data.filter((item) =>
+        item.title.toLowerCase().includes(searchQuery.toLowerCase())
+      );
       setFilteredData(filtered);
     }
-  },[searchQuery, data]);
-
-  
+  }, [searchQuery, data]);
 
   const handleToggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -86,10 +85,10 @@ const App = () => {
   };
 
   const handleDelete = (item: Product) => {
-   setSelectedItem((prevItems) => {
-    return prevItems.filter((prevItems) => prevItems.id !== item.id);
-   })
-  }
+    setSelectedItem((prevItems) => {
+      return prevItems.filter((prevItems) => prevItems.id !== item.id);
+    });
+  };
 
   return (
     <div>
@@ -113,6 +112,13 @@ const App = () => {
             />
           }
         />
+        <Route path="/products/:id" element={<ItemDetailPage
+              isSidebarOpen={isSidebarOpen}
+              handleToggleSidebar={handleToggleSidebar}
+              handleAddToCart={handleAddToCart}
+              handleDelete={handleDelete}
+              selectedItem={selectedItem}
+              />}/>
       </Routes>
     </div>
   );
